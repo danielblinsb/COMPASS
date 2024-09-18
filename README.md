@@ -1,5 +1,5 @@
 
-### COMPASS - PB - SENAC/UNICESUMAR
+### COMPASS.UOL - PB - SENAC/UNICESUMAR
 
 #### Atividade de Linux / Prática
 
@@ -9,7 +9,7 @@
 
 1. **Chave Pública para Acesso ao Ambiente:**
    - Serviço EC2 > Network & Security > Key Pairs > Create Key Pair
-   - Tipo de chave para uso com Open SSH: escolha ".pem"
+   - Tipo de chave para uso com Open SSH: ".pem"
    - Criar chave, o arquivo de chave privada é baixado automaticamente. Guardar em segurança para uso posterior no acesso à instância através de Open SSH.
 
 2. **Instância EC2:**
@@ -24,7 +24,7 @@
 
 3. **Elastic IP:**
    - Serviço EC2 > EC2 Dashboard > Network & Security > Elastic Ips > Allocate Elastic IP address
-   - Elastic IP address settings: padrão da console (não modificar)
+   - Elastic IP address settings: padrão da console (**não modificar**)
    - Tags: configurar de acordo com o projeto
    - Allocate
    - Selecionar o endereço IP alocado > Actions > Associate Elastic IP address
@@ -52,9 +52,10 @@
    - Atribuir permissões de leitura à chave somente para o proprietário do arquivo com o comando `chmod 400 path-to-your-key-pair.pem`
    - Conectar à instância com o comando `ssh -i caminho/para/sua-chave.pem ec2-user@seu-endereco-ip`
    - Verificar distribuição Linux usada na instância com `cat /etc/os-release`
-   - Comando para o NFS: `sudo yum install nfs-utils` (já instalado na última versão)
+   - Comando para o NFS: `sudo yum install nfs-utils` (**já instalado e na última versão**)
    - Verificar status do serviço: `sudo systemctl status nfs-server`
    - Iniciar o serviço NFS: `sudo systemctl start nfs-server`
+   - Habilitar inicialização automática: `sudo systemctl enable nfs-server`
 
 6. **Criar um Diretório dentro do Filesystem do NFS com seu nome:**
    - `sudo mkdir /mnt/nfs_share` (substituir nfs_share por seu nome)
@@ -110,7 +111,7 @@
      fi
      echo "$DATE_TIME - $SERVICE - $STATUS_MSG - $MESSAGE" > $NFS_DIR/apache_status.txt
      ```
-   - Seguir os mesmos passos do tópico 8 após salvar o arquivo `check_apache.sh`
+   - Seguir os mesmos passos do **tópico 8** após salvar o arquivo `check_apache.sh`
 
 11. **O Script deve Gerar 2 Arquivos de Saída: 1 para o Serviço ONLINE e 1 para o Serviço OFFLINE:**
     - Alterar o script `check_apache.sh`, inserir linhas:
@@ -133,7 +134,7 @@
       echo "$DATE_TIME - $SERVICE - $STATUS_MSG - $MESSAGE" > $OUTPUT_FILE
       ```
     - Seguir os mesmos passos do tópico 8 após salvar o script
-    - No diretório NFS devem constar três arquivos: `apache_status_offline.txt`, `apache_status_online.txt` e `apache_status.txt` (pode ser apagado)
+    - No diretório NFS devem constar três arquivos: `apache_status_offline.txt`, `apache_status_online.txt` e `apache_status.txt` (**pode ser apagado**)
     - Apagar arquivo: `rm /mnt/seu-nome/apache_status.txt`
     - Executar o script após parar ou reiniciar o serviço
     - Usar `cat /mnt/seu-nome/*` para exibir o conteúdo de saída de ambos arquivos
@@ -141,7 +142,7 @@
 12. **Preparar a Execução Automatizada do Script a Cada 5 Minutos:**
     - Usar o Crontab: `sudo crontab -e`
     - Adicionar a linha: `*/5 * * * * /check_apache.sh`
-    - Salvar e sair (pressionar "Esc" e digitar ":wq")
+    - Salvar e sair (**pressionar "Esc" e digitar ":wq"**)
     - Listar tarefa crontab: `sudo crontab -l`
     - A cada cinco minutos as saídas do script serão alteradas de acordo com o estado do serviço
 
