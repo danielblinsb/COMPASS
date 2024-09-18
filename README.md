@@ -133,7 +133,7 @@
       fi
       echo "$DATE_TIME - $SERVICE - $STATUS_MSG - $MESSAGE" > $OUTPUT_FILE
       ```
-    - Seguir os mesmos passos do tópico 8 após salvar o script
+    - Seguir os mesmos passos do **tópico 8** após salvar o script
     - No diretório NFS devem constar três arquivos: `apache_status_offline.txt`, `apache_status_online.txt` e `apache_status.txt` (**pode ser apagado**)
     - Apagar arquivo: `rm /mnt/seu-nome/apache_status.txt`
     - Executar o script após parar ou reiniciar o serviço
